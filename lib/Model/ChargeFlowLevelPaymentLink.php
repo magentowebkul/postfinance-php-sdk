@@ -19,8 +19,6 @@
 
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
@@ -32,7 +30,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ChargeFlowLevelPaymentLink implements ModelInterface, ArrayAccess
+class ChargeFlowLevelPaymentLink extends TransactionAwareEntity 
 {
     const DISCRIMINATOR = null;
 
@@ -50,8 +48,6 @@ class ChargeFlowLevelPaymentLink implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'charge_flow_level' => '\PostFinanceCheckout\Sdk\Model\ChargeFlowLevel',
-        'id' => 'int',
-        'linked_space_id' => 'int',
         'payment_link' => 'string'
     ];
 
@@ -62,8 +58,6 @@ class ChargeFlowLevelPaymentLink implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'charge_flow_level' => null,
-        'id' => 'int64',
-        'linked_space_id' => 'int64',
         'payment_link' => null
     ];
 
@@ -75,8 +69,6 @@ class ChargeFlowLevelPaymentLink implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'charge_flow_level' => 'chargeFlowLevel',
-        'id' => 'id',
-        'linked_space_id' => 'linkedSpaceId',
         'payment_link' => 'paymentLink'
     ];
 
@@ -87,8 +79,6 @@ class ChargeFlowLevelPaymentLink implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'charge_flow_level' => 'setChargeFlowLevel',
-        'id' => 'setId',
-        'linked_space_id' => 'setLinkedSpaceId',
         'payment_link' => 'setPaymentLink'
     ];
 
@@ -99,19 +89,11 @@ class ChargeFlowLevelPaymentLink implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'charge_flow_level' => 'getChargeFlowLevel',
-        'id' => 'getId',
-        'linked_space_id' => 'getLinkedSpaceId',
         'payment_link' => 'getPaymentLink'
     ];
 
     
 
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
@@ -119,14 +101,12 @@ class ChargeFlowLevelPaymentLink implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
+        parent::__construct($data);
+
         
         $this->container['charge_flow_level'] = isset($data['charge_flow_level']) ? $data['charge_flow_level'] : null;
-        
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
         
         $this->container['payment_link'] = isset($data['payment_link']) ? $data['payment_link'] : null;
         
@@ -139,7 +119,7 @@ class ChargeFlowLevelPaymentLink implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
 
         return $invalidProperties;
     }
@@ -151,7 +131,7 @@ class ChargeFlowLevelPaymentLink implements ModelInterface, ArrayAccess
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes;
+        return self::$swaggerTypes + parent::swaggerTypes();
     }
 
     /**
@@ -161,7 +141,7 @@ class ChargeFlowLevelPaymentLink implements ModelInterface, ArrayAccess
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats;
+        return self::$swaggerFormats + parent::swaggerFormats();
     }
 
 
@@ -173,7 +153,7 @@ class ChargeFlowLevelPaymentLink implements ModelInterface, ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -183,7 +163,7 @@ class ChargeFlowLevelPaymentLink implements ModelInterface, ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -193,7 +173,7 @@ class ChargeFlowLevelPaymentLink implements ModelInterface, ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -234,63 +214,13 @@ class ChargeFlowLevelPaymentLink implements ModelInterface, ArrayAccess
     /**
      * Sets charge_flow_level
      *
-     * @param \PostFinanceCheckout\Sdk\Model\ChargeFlowLevel $charge_flow_level The charge flow level that the payment link belongs to.
+     * @param \PostFinanceCheckout\Sdk\Model\ChargeFlowLevel $charge_flow_level 
      *
      * @return $this
      */
     public function setChargeFlowLevel($charge_flow_level)
     {
         $this->container['charge_flow_level'] = $charge_flow_level;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The ID of the space this object belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
 
         return $this;
     }
@@ -309,7 +239,7 @@ class ChargeFlowLevelPaymentLink implements ModelInterface, ArrayAccess
     /**
      * Sets payment_link
      *
-     * @param string $payment_link The URL provided to the customer for entering their payment details and completing the transaction.
+     * @param string $payment_link 
      *
      * @return $this
      */

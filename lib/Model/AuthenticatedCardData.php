@@ -25,7 +25,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * AuthenticatedCardData model
  *
  * @category    Class
- * @description 
+ * @description This model holds the card data and optional cardholder authentication details.
  * @package     PostFinanceCheckout\Sdk
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
@@ -96,7 +96,7 @@ class AuthenticatedCardData extends TokenizedCardData
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         parent::__construct($data);
 
@@ -207,7 +207,7 @@ class AuthenticatedCardData extends TokenizedCardData
     /**
      * Sets cardholder_authentication
      *
-     * @param \PostFinanceCheckout\Sdk\Model\CardholderAuthentication $cardholder_authentication Optional authentication details for the cardholder, such as 3D Secure authentication, used when the cardholder has already been verified during the transaction for added security.
+     * @param \PostFinanceCheckout\Sdk\Model\CardholderAuthentication $cardholder_authentication The cardholder authentication information. The authentication is optional and can be provided if the cardholder has been already authenticated (e.g. in 3-D Secure system).
      *
      * @return $this
      */

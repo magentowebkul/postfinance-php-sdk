@@ -139,7 +139,7 @@ class ChargeFlow implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         
         $this->container['conditions'] = isset($data['conditions']) ? $data['conditions'] : null;
@@ -262,7 +262,7 @@ class ChargeFlow implements ModelInterface, ArrayAccess
     /**
      * Sets conditions
      *
-     * @param int[] $conditions Conditions allow to define criteria that a transaction must fulfill in order for the charge flow to be considered for processing the payment.
+     * @param int[] $conditions If a transaction meets all selected conditions, the charge flow will be used to process the transaction. If the conditions are not met the next charge flow in line will be chosen according to the priorities.
      *
      * @return $this
      */
@@ -337,7 +337,7 @@ class ChargeFlow implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name The name used to identify the charge flow.
+     * @param string $name The charge flow name is used internally to identify the configuration in administrative interfaces. For example it is used within search fields and hence it should be distinct and descriptive.
      *
      * @return $this
      */
@@ -387,7 +387,7 @@ class ChargeFlow implements ModelInterface, ArrayAccess
     /**
      * Sets priority
      *
-     * @param int $priority The priority that determines the order in which charge flows are taken into account when processing a payment. Low values are considered first.
+     * @param int $priority The priority orders the charge flows. As such the priority determines together with the conditions the charge flow the selection mechanism for a particular transaction. A change of the priority affects all future selections.
      *
      * @return $this
      */

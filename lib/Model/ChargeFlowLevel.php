@@ -19,8 +19,6 @@
 
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
@@ -32,7 +30,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class ChargeFlowLevel implements ModelInterface, ArrayAccess
+class ChargeFlowLevel extends TransactionAwareEntity 
 {
     const DISCRIMINATOR = null;
 
@@ -52,9 +50,6 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
         'asynchronous_charge' => 'int',
         'configuration' => '\PostFinanceCheckout\Sdk\Model\ChargeFlowLevelConfiguration',
         'created_on' => '\DateTime',
-        'id' => 'int',
-        'linked_space_id' => 'int',
-        'linked_transaction' => 'int',
         'planned_purge_date' => '\DateTime',
         'state' => '\PostFinanceCheckout\Sdk\Model\ChargeFlowLevelState',
         'synchronous_charge' => 'int',
@@ -73,9 +68,6 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
         'asynchronous_charge' => 'int64',
         'configuration' => null,
         'created_on' => 'date-time',
-        'id' => 'int64',
-        'linked_space_id' => 'int64',
-        'linked_transaction' => 'int64',
         'planned_purge_date' => 'date-time',
         'state' => null,
         'synchronous_charge' => 'int64',
@@ -95,9 +87,6 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
         'asynchronous_charge' => 'asynchronousCharge',
         'configuration' => 'configuration',
         'created_on' => 'createdOn',
-        'id' => 'id',
-        'linked_space_id' => 'linkedSpaceId',
-        'linked_transaction' => 'linkedTransaction',
         'planned_purge_date' => 'plannedPurgeDate',
         'state' => 'state',
         'synchronous_charge' => 'synchronousCharge',
@@ -116,9 +105,6 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
         'asynchronous_charge' => 'setAsynchronousCharge',
         'configuration' => 'setConfiguration',
         'created_on' => 'setCreatedOn',
-        'id' => 'setId',
-        'linked_space_id' => 'setLinkedSpaceId',
-        'linked_transaction' => 'setLinkedTransaction',
         'planned_purge_date' => 'setPlannedPurgeDate',
         'state' => 'setState',
         'synchronous_charge' => 'setSynchronousCharge',
@@ -137,9 +123,6 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
         'asynchronous_charge' => 'getAsynchronousCharge',
         'configuration' => 'getConfiguration',
         'created_on' => 'getCreatedOn',
-        'id' => 'getId',
-        'linked_space_id' => 'getLinkedSpaceId',
-        'linked_transaction' => 'getLinkedTransaction',
         'planned_purge_date' => 'getPlannedPurgeDate',
         'state' => 'getState',
         'synchronous_charge' => 'getSynchronousCharge',
@@ -151,12 +134,6 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
 
     
 
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
@@ -164,20 +141,16 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
+        parent::__construct($data);
+
         
         $this->container['asynchronous_charge'] = isset($data['asynchronous_charge']) ? $data['asynchronous_charge'] : null;
         
         $this->container['configuration'] = isset($data['configuration']) ? $data['configuration'] : null;
         
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
-        
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['linked_transaction'] = isset($data['linked_transaction']) ? $data['linked_transaction'] : null;
         
         $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
         
@@ -202,7 +175,7 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
 
         return $invalidProperties;
     }
@@ -214,7 +187,7 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes;
+        return self::$swaggerTypes + parent::swaggerTypes();
     }
 
     /**
@@ -224,7 +197,7 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats;
+        return self::$swaggerFormats + parent::swaggerFormats();
     }
 
 
@@ -236,7 +209,7 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -246,7 +219,7 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -256,7 +229,7 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -297,7 +270,7 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
     /**
      * Sets asynchronous_charge
      *
-     * @param int $asynchronous_charge The charge to process the payment asynchronously.
+     * @param int $asynchronous_charge 
      *
      * @return $this
      */
@@ -322,7 +295,7 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
     /**
      * Sets configuration
      *
-     * @param \PostFinanceCheckout\Sdk\Model\ChargeFlowLevelConfiguration $configuration The configuration that was used for this charge flow level.
+     * @param \PostFinanceCheckout\Sdk\Model\ChargeFlowLevelConfiguration $configuration 
      *
      * @return $this
      */
@@ -354,81 +327,6 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
     public function setCreatedOn($created_on)
     {
         $this->container['created_on'] = $created_on;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The ID of the space this object belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_transaction
-     *
-     * @return int
-     */
-    public function getLinkedTransaction()
-    {
-        return $this->container['linked_transaction'];
-    }
-
-    /**
-     * Sets linked_transaction
-     *
-     * @param int $linked_transaction The payment transaction this object is linked to.
-     *
-     * @return $this
-     */
-    public function setLinkedTransaction($linked_transaction)
-    {
-        $this->container['linked_transaction'] = $linked_transaction;
 
         return $this;
     }
@@ -497,7 +395,7 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
     /**
      * Sets synchronous_charge
      *
-     * @param int $synchronous_charge The charge to process the payment synchronously.
+     * @param int $synchronous_charge 
      *
      * @return $this
      */
@@ -522,7 +420,7 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
     /**
      * Sets timeout_on
      *
-     * @param \DateTime $timeout_on The date and time when the charge flow level will expire.
+     * @param \DateTime $timeout_on 
      *
      * @return $this
      */
@@ -547,7 +445,7 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
     /**
      * Sets token_charge
      *
-     * @param int $token_charge The charge to process the payment using a token.
+     * @param int $token_charge 
      *
      * @return $this
      */
@@ -572,7 +470,7 @@ class ChargeFlowLevel implements ModelInterface, ArrayAccess
     /**
      * Sets transaction
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Transaction $transaction The transaction that the charge flow level belongs to.
+     * @param \PostFinanceCheckout\Sdk\Model\Transaction $transaction 
      *
      * @return $this
      */

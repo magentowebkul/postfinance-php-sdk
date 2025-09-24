@@ -96,7 +96,7 @@ class RefundCommentCreate extends AbstractRefundCommentActive
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         parent::__construct($data);
 
@@ -214,7 +214,7 @@ class RefundCommentCreate extends AbstractRefundCommentActive
     /**
      * Sets refund
      *
-     * @param int $refund The refund that the comment belongs to.
+     * @param int $refund 
      *
      * @return $this
      */

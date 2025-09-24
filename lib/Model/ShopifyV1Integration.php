@@ -51,7 +51,6 @@ class ShopifyV1Integration implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'additional_line_item_data' => '\PostFinanceCheckout\Sdk\Model\ShopifyAdditionalLineItemData[]',
         'allow_invoice_download' => 'bool',
-        'allow_payment_with_tax_discrepancy' => 'bool',
         'allowed_payment_method_configurations' => '\PostFinanceCheckout\Sdk\Model\PaymentMethodConfiguration[]',
         'currency' => 'string',
         'id' => 'int',
@@ -84,7 +83,6 @@ class ShopifyV1Integration implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'additional_line_item_data' => null,
         'allow_invoice_download' => null,
-        'allow_payment_with_tax_discrepancy' => null,
         'allowed_payment_method_configurations' => null,
         'currency' => null,
         'id' => 'int64',
@@ -118,7 +116,6 @@ class ShopifyV1Integration implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'additional_line_item_data' => 'additionalLineItemData',
         'allow_invoice_download' => 'allowInvoiceDownload',
-        'allow_payment_with_tax_discrepancy' => 'allowPaymentWithTaxDiscrepancy',
         'allowed_payment_method_configurations' => 'allowedPaymentMethodConfigurations',
         'currency' => 'currency',
         'id' => 'id',
@@ -151,7 +148,6 @@ class ShopifyV1Integration implements ModelInterface, ArrayAccess
     protected static $setters = [
         'additional_line_item_data' => 'setAdditionalLineItemData',
         'allow_invoice_download' => 'setAllowInvoiceDownload',
-        'allow_payment_with_tax_discrepancy' => 'setAllowPaymentWithTaxDiscrepancy',
         'allowed_payment_method_configurations' => 'setAllowedPaymentMethodConfigurations',
         'currency' => 'setCurrency',
         'id' => 'setId',
@@ -184,7 +180,6 @@ class ShopifyV1Integration implements ModelInterface, ArrayAccess
     protected static $getters = [
         'additional_line_item_data' => 'getAdditionalLineItemData',
         'allow_invoice_download' => 'getAllowInvoiceDownload',
-        'allow_payment_with_tax_discrepancy' => 'getAllowPaymentWithTaxDiscrepancy',
         'allowed_payment_method_configurations' => 'getAllowedPaymentMethodConfigurations',
         'currency' => 'getCurrency',
         'id' => 'getId',
@@ -224,14 +219,12 @@ class ShopifyV1Integration implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         
         $this->container['additional_line_item_data'] = isset($data['additional_line_item_data']) ? $data['additional_line_item_data'] : null;
         
         $this->container['allow_invoice_download'] = isset($data['allow_invoice_download']) ? $data['allow_invoice_download'] : null;
-        
-        $this->container['allow_payment_with_tax_discrepancy'] = isset($data['allow_payment_with_tax_discrepancy']) ? $data['allow_payment_with_tax_discrepancy'] : null;
         
         $this->container['allowed_payment_method_configurations'] = isset($data['allowed_payment_method_configurations']) ? $data['allowed_payment_method_configurations'] : null;
         
@@ -425,31 +418,6 @@ class ShopifyV1Integration implements ModelInterface, ArrayAccess
     public function setAllowInvoiceDownload($allow_invoice_download)
     {
         $this->container['allow_invoice_download'] = $allow_invoice_download;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets allow_payment_with_tax_discrepancy
-     *
-     * @return bool
-     */
-    public function getAllowPaymentWithTaxDiscrepancy()
-    {
-        return $this->container['allow_payment_with_tax_discrepancy'];
-    }
-
-    /**
-     * Sets allow_payment_with_tax_discrepancy
-     *
-     * @param bool $allow_payment_with_tax_discrepancy If in the merchant Shopify store is used legacy tax service, rounding discrepancies in line item tax amounts may occur. When this check is enabled, such discrepancies are tolerated, allowing the payment to proceed without raising an exception.
-     *
-     * @return $this
-     */
-    public function setAllowPaymentWithTaxDiscrepancy($allow_payment_with_tax_discrepancy)
-    {
-        $this->container['allow_payment_with_tax_discrepancy'] = $allow_payment_with_tax_discrepancy;
 
         return $this;
     }

@@ -19,8 +19,6 @@
 
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
@@ -32,7 +30,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class DeliveryIndication implements ModelInterface, ArrayAccess
+class DeliveryIndication extends TransactionAwareEntity 
 {
     const DISCRIMINATOR = null;
 
@@ -53,9 +51,6 @@ class DeliveryIndication implements ModelInterface, ArrayAccess
         'automatically_decided_on' => '\DateTime',
         'completion' => 'int',
         'created_on' => '\DateTime',
-        'id' => 'int',
-        'linked_space_id' => 'int',
-        'linked_transaction' => 'int',
         'manual_decision_timeout_on' => '\DateTime',
         'manually_decided_by' => 'int',
         'manually_decided_on' => '\DateTime',
@@ -75,9 +70,6 @@ class DeliveryIndication implements ModelInterface, ArrayAccess
         'automatically_decided_on' => 'date-time',
         'completion' => 'int64',
         'created_on' => 'date-time',
-        'id' => 'int64',
-        'linked_space_id' => 'int64',
-        'linked_transaction' => 'int64',
         'manual_decision_timeout_on' => 'date-time',
         'manually_decided_by' => 'int64',
         'manually_decided_on' => 'date-time',
@@ -98,9 +90,6 @@ class DeliveryIndication implements ModelInterface, ArrayAccess
         'automatically_decided_on' => 'automaticallyDecidedOn',
         'completion' => 'completion',
         'created_on' => 'createdOn',
-        'id' => 'id',
-        'linked_space_id' => 'linkedSpaceId',
-        'linked_transaction' => 'linkedTransaction',
         'manual_decision_timeout_on' => 'manualDecisionTimeoutOn',
         'manually_decided_by' => 'manuallyDecidedBy',
         'manually_decided_on' => 'manuallyDecidedOn',
@@ -120,9 +109,6 @@ class DeliveryIndication implements ModelInterface, ArrayAccess
         'automatically_decided_on' => 'setAutomaticallyDecidedOn',
         'completion' => 'setCompletion',
         'created_on' => 'setCreatedOn',
-        'id' => 'setId',
-        'linked_space_id' => 'setLinkedSpaceId',
-        'linked_transaction' => 'setLinkedTransaction',
         'manual_decision_timeout_on' => 'setManualDecisionTimeoutOn',
         'manually_decided_by' => 'setManuallyDecidedBy',
         'manually_decided_on' => 'setManuallyDecidedOn',
@@ -142,9 +128,6 @@ class DeliveryIndication implements ModelInterface, ArrayAccess
         'automatically_decided_on' => 'getAutomaticallyDecidedOn',
         'completion' => 'getCompletion',
         'created_on' => 'getCreatedOn',
-        'id' => 'getId',
-        'linked_space_id' => 'getLinkedSpaceId',
-        'linked_transaction' => 'getLinkedTransaction',
         'manual_decision_timeout_on' => 'getManualDecisionTimeoutOn',
         'manually_decided_by' => 'getManuallyDecidedBy',
         'manually_decided_on' => 'getManuallyDecidedOn',
@@ -156,12 +139,6 @@ class DeliveryIndication implements ModelInterface, ArrayAccess
 
     
 
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
@@ -169,8 +146,10 @@ class DeliveryIndication implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
+        parent::__construct($data);
+
         
         $this->container['automatic_decision_reason'] = isset($data['automatic_decision_reason']) ? $data['automatic_decision_reason'] : null;
         
@@ -179,12 +158,6 @@ class DeliveryIndication implements ModelInterface, ArrayAccess
         $this->container['completion'] = isset($data['completion']) ? $data['completion'] : null;
         
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
-        
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['linked_transaction'] = isset($data['linked_transaction']) ? $data['linked_transaction'] : null;
         
         $this->container['manual_decision_timeout_on'] = isset($data['manual_decision_timeout_on']) ? $data['manual_decision_timeout_on'] : null;
         
@@ -209,7 +182,7 @@ class DeliveryIndication implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
 
         return $invalidProperties;
     }
@@ -221,7 +194,7 @@ class DeliveryIndication implements ModelInterface, ArrayAccess
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes;
+        return self::$swaggerTypes + parent::swaggerTypes();
     }
 
     /**
@@ -231,7 +204,7 @@ class DeliveryIndication implements ModelInterface, ArrayAccess
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats;
+        return self::$swaggerFormats + parent::swaggerFormats();
     }
 
 
@@ -243,7 +216,7 @@ class DeliveryIndication implements ModelInterface, ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -253,7 +226,7 @@ class DeliveryIndication implements ModelInterface, ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -263,7 +236,7 @@ class DeliveryIndication implements ModelInterface, ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -304,7 +277,7 @@ class DeliveryIndication implements ModelInterface, ArrayAccess
     /**
      * Sets automatic_decision_reason
      *
-     * @param \PostFinanceCheckout\Sdk\Model\DeliveryIndicationDecisionReason $automatic_decision_reason The reason for the automatic system decision about the delivery indication.
+     * @param \PostFinanceCheckout\Sdk\Model\DeliveryIndicationDecisionReason $automatic_decision_reason 
      *
      * @return $this
      */
@@ -329,7 +302,7 @@ class DeliveryIndication implements ModelInterface, ArrayAccess
     /**
      * Sets automatically_decided_on
      *
-     * @param \DateTime $automatically_decided_on The date and time when an automatic decision was made.
+     * @param \DateTime $automatically_decided_on 
      *
      * @return $this
      */
@@ -354,7 +327,7 @@ class DeliveryIndication implements ModelInterface, ArrayAccess
     /**
      * Sets completion
      *
-     * @param int $completion The transaction completion that the delivery indication is linked to.
+     * @param int $completion 
      *
      * @return $this
      */
@@ -392,81 +365,6 @@ class DeliveryIndication implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The ID of the space this object belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_transaction
-     *
-     * @return int
-     */
-    public function getLinkedTransaction()
-    {
-        return $this->container['linked_transaction'];
-    }
-
-    /**
-     * Sets linked_transaction
-     *
-     * @param int $linked_transaction The payment transaction this object is linked to.
-     *
-     * @return $this
-     */
-    public function setLinkedTransaction($linked_transaction)
-    {
-        $this->container['linked_transaction'] = $linked_transaction;
-
-        return $this;
-    }
-    
-
-    /**
      * Gets manual_decision_timeout_on
      *
      * @return \DateTime
@@ -479,7 +377,7 @@ class DeliveryIndication implements ModelInterface, ArrayAccess
     /**
      * Sets manual_decision_timeout_on
      *
-     * @param \DateTime $manual_decision_timeout_on The date and time by which a decision must be made before the system automatically proceeds according to the connector's predefined settings.
+     * @param \DateTime $manual_decision_timeout_on 
      *
      * @return $this
      */
@@ -504,7 +402,7 @@ class DeliveryIndication implements ModelInterface, ArrayAccess
     /**
      * Sets manually_decided_by
      *
-     * @param int $manually_decided_by The ID of the user who manually decided the delivery indication's state.
+     * @param int $manually_decided_by 
      *
      * @return $this
      */
@@ -529,7 +427,7 @@ class DeliveryIndication implements ModelInterface, ArrayAccess
     /**
      * Sets manually_decided_on
      *
-     * @param \DateTime $manually_decided_on The date and time when a manual decision was made.
+     * @param \DateTime $manually_decided_on 
      *
      * @return $this
      */
@@ -604,7 +502,7 @@ class DeliveryIndication implements ModelInterface, ArrayAccess
     /**
      * Sets timeout_on
      *
-     * @param \DateTime $timeout_on The date and time when the delivery indication will expire.
+     * @param \DateTime $timeout_on 
      *
      * @return $this
      */
@@ -629,7 +527,7 @@ class DeliveryIndication implements ModelInterface, ArrayAccess
     /**
      * Sets transaction
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Transaction $transaction The payment transaction that the delivery indication is linked to.
+     * @param \PostFinanceCheckout\Sdk\Model\Transaction $transaction 
      *
      * @return $this
      */

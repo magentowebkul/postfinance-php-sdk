@@ -131,7 +131,7 @@ class TransactionCreate extends AbstractTransactionPending
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         parent::__construct($data);
 
@@ -431,7 +431,7 @@ class TransactionCreate extends AbstractTransactionPending
     /**
      * Sets environment
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Environment $environment The environment used when rendering resources.
+     * @param \PostFinanceCheckout\Sdk\Model\Environment $environment 
      *
      * @return $this
      */

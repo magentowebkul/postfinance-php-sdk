@@ -18,7 +18,6 @@
  */
 
 
-
 namespace PostFinanceCheckout\Sdk\Service;
 
 use PostFinanceCheckout\Sdk\ApiClient;
@@ -47,9 +46,9 @@ class LanguageService {
 	/**
 	 * Constructor.
 	 *
-	 * @param ApiClient $apiClient|null the api client
+	 * @param ApiClient $apiClient the api client
 	 */
-	public function __construct(ApiClient $apiClient = null) {
+	public function __construct(ApiClient $apiClient) {
 		if (is_null($apiClient)) {
 			throw new \InvalidArgumentException('The api client is required.');
 		}
@@ -70,21 +69,23 @@ class LanguageService {
 	/**
 	 * Operation all
 	 *
-	 * Returns the possible languages that the API supports
+	 * All
 	 *
-	 * @return array
+	 * @throws \PostFinanceCheckout\Sdk\ApiException
+	 * @throws \PostFinanceCheckout\Sdk\VersioningException
+	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
+	 * @return \PostFinanceCheckout\Sdk\Model\RestLanguage[]
 	 */
 	public function all() {
-		$jsonString = file_get_contents(__DIR__ . '/../languages.json');
-		$languageData = $this->apiClient->getSerializer()->deserialize(json_decode($jsonString, true), '\PostFinanceCheckout\Sdk\Model\RestLanguage[]');
-		return $languageData;
+		return $this->allWithHttpInfo()->getData();
 	}
 
 	/**
 	 * Operation allWithHttpInfo
 	 *
 	 * All
-	*
+     
+     *
 	 * @throws \PostFinanceCheckout\Sdk\ApiException
 	 * @throws \PostFinanceCheckout\Sdk\VersioningException
 	 * @throws \PostFinanceCheckout\Sdk\Http\ConnectionException
@@ -127,36 +128,38 @@ class LanguageService {
 				$headerParams,
 				'\PostFinanceCheckout\Sdk\Model\RestLanguage[]',
 				'/language/all'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\PostFinanceCheckout\Sdk\Model\RestLanguage[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
-			 case 200:
-				$data = ObjectSerializer::deserialize(
-					$e->getResponseBody(),
-					'\PostFinanceCheckout\Sdk\Model\RestLanguage[]',
-					$e->getResponseHeaders()
-				);
-				$e->setResponseObject($data);
-			 break;
-			 case 442:
-				$data = ObjectSerializer::deserialize(
-					$e->getResponseBody(),
-					'\PostFinanceCheckout\Sdk\Model\ClientError',
-					$e->getResponseHeaders()
-				);
-				$e->setResponseObject($data);
-			 break;
-			 case 542:
-				$data = ObjectSerializer::deserialize(
-					$e->getResponseBody(),
-					'\PostFinanceCheckout\Sdk\Model\ServerError',
-					$e->getResponseHeaders()
-				);
-				$e->setResponseObject($data);
-			 break;
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\RestLanguage[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 442:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ClientError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
+                case 542:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\PostFinanceCheckout\Sdk\Model\ServerError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                break;
 			}
 			throw $e;
 		}
 	}
+
+
 }

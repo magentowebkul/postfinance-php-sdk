@@ -19,8 +19,6 @@
 
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
@@ -32,7 +30,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class RefundRecoveryBankTransaction implements ModelInterface, ArrayAccess
+class RefundRecoveryBankTransaction extends TransactionAwareEntity 
 {
     const DISCRIMINATOR = null;
 
@@ -50,11 +48,8 @@ class RefundRecoveryBankTransaction implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'bank_transaction' => '\PostFinanceCheckout\Sdk\Model\BankTransaction',
-        'id' => 'int',
         'language' => 'string',
         'line_items' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
-        'linked_space_id' => 'int',
-        'linked_transaction' => 'int',
         'refund' => '\PostFinanceCheckout\Sdk\Model\Refund',
         'refund_currency_amount' => 'float',
         'refund_currency_value_amount' => 'float',
@@ -69,11 +64,8 @@ class RefundRecoveryBankTransaction implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'bank_transaction' => null,
-        'id' => 'int64',
         'language' => null,
         'line_items' => null,
-        'linked_space_id' => 'int64',
-        'linked_transaction' => 'int64',
         'refund' => null,
         'refund_currency_amount' => null,
         'refund_currency_value_amount' => null,
@@ -89,11 +81,8 @@ class RefundRecoveryBankTransaction implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'bank_transaction' => 'bankTransaction',
-        'id' => 'id',
         'language' => 'language',
         'line_items' => 'lineItems',
-        'linked_space_id' => 'linkedSpaceId',
-        'linked_transaction' => 'linkedTransaction',
         'refund' => 'refund',
         'refund_currency_amount' => 'refundCurrencyAmount',
         'refund_currency_value_amount' => 'refundCurrencyValueAmount',
@@ -108,11 +97,8 @@ class RefundRecoveryBankTransaction implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'bank_transaction' => 'setBankTransaction',
-        'id' => 'setId',
         'language' => 'setLanguage',
         'line_items' => 'setLineItems',
-        'linked_space_id' => 'setLinkedSpaceId',
-        'linked_transaction' => 'setLinkedTransaction',
         'refund' => 'setRefund',
         'refund_currency_amount' => 'setRefundCurrencyAmount',
         'refund_currency_value_amount' => 'setRefundCurrencyValueAmount',
@@ -127,11 +113,8 @@ class RefundRecoveryBankTransaction implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'bank_transaction' => 'getBankTransaction',
-        'id' => 'getId',
         'language' => 'getLanguage',
         'line_items' => 'getLineItems',
-        'linked_space_id' => 'getLinkedSpaceId',
-        'linked_transaction' => 'getLinkedTransaction',
         'refund' => 'getRefund',
         'refund_currency_amount' => 'getRefundCurrencyAmount',
         'refund_currency_value_amount' => 'getRefundCurrencyValueAmount',
@@ -141,12 +124,6 @@ class RefundRecoveryBankTransaction implements ModelInterface, ArrayAccess
 
     
 
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
@@ -154,20 +131,16 @@ class RefundRecoveryBankTransaction implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
+        parent::__construct($data);
+
         
         $this->container['bank_transaction'] = isset($data['bank_transaction']) ? $data['bank_transaction'] : null;
-        
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
         $this->container['language'] = isset($data['language']) ? $data['language'] : null;
         
         $this->container['line_items'] = isset($data['line_items']) ? $data['line_items'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['linked_transaction'] = isset($data['linked_transaction']) ? $data['linked_transaction'] : null;
         
         $this->container['refund'] = isset($data['refund']) ? $data['refund'] : null;
         
@@ -188,7 +161,7 @@ class RefundRecoveryBankTransaction implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
 
         return $invalidProperties;
     }
@@ -200,7 +173,7 @@ class RefundRecoveryBankTransaction implements ModelInterface, ArrayAccess
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes;
+        return self::$swaggerTypes + parent::swaggerTypes();
     }
 
     /**
@@ -210,7 +183,7 @@ class RefundRecoveryBankTransaction implements ModelInterface, ArrayAccess
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats;
+        return self::$swaggerFormats + parent::swaggerFormats();
     }
 
 
@@ -222,7 +195,7 @@ class RefundRecoveryBankTransaction implements ModelInterface, ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -232,7 +205,7 @@ class RefundRecoveryBankTransaction implements ModelInterface, ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -242,7 +215,7 @@ class RefundRecoveryBankTransaction implements ModelInterface, ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -283,38 +256,13 @@ class RefundRecoveryBankTransaction implements ModelInterface, ArrayAccess
     /**
      * Sets bank_transaction
      *
-     * @param \PostFinanceCheckout\Sdk\Model\BankTransaction $bank_transaction Provides general information about the bank transaction.
+     * @param \PostFinanceCheckout\Sdk\Model\BankTransaction $bank_transaction 
      *
      * @return $this
      */
     public function setBankTransaction($bank_transaction)
     {
         $this->container['bank_transaction'] = $bank_transaction;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
 
         return $this;
     }
@@ -358,63 +306,13 @@ class RefundRecoveryBankTransaction implements ModelInterface, ArrayAccess
     /**
      * Sets line_items
      *
-     * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $line_items The line items that were recovered.
+     * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $line_items The line items contain the items which could be recovered.
      *
      * @return $this
      */
     public function setLineItems($line_items)
     {
         $this->container['line_items'] = $line_items;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The ID of the space this object belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_transaction
-     *
-     * @return int
-     */
-    public function getLinkedTransaction()
-    {
-        return $this->container['linked_transaction'];
-    }
-
-    /**
-     * Sets linked_transaction
-     *
-     * @param int $linked_transaction The payment transaction this object is linked to.
-     *
-     * @return $this
-     */
-    public function setLinkedTransaction($linked_transaction)
-    {
-        $this->container['linked_transaction'] = $linked_transaction;
 
         return $this;
     }
@@ -433,7 +331,7 @@ class RefundRecoveryBankTransaction implements ModelInterface, ArrayAccess
     /**
      * Sets refund
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Refund $refund The refund this bank transaction belongs to.
+     * @param \PostFinanceCheckout\Sdk\Model\Refund $refund 
      *
      * @return $this
      */
@@ -458,7 +356,7 @@ class RefundRecoveryBankTransaction implements ModelInterface, ArrayAccess
     /**
      * Sets refund_currency_amount
      *
-     * @param float $refund_currency_amount The posting amount represents the monetary value of the bank transaction, recorded in the refund's currency, before applying any adjustments.
+     * @param float $refund_currency_amount Specify the posting amount in the refund's currency.
      *
      * @return $this
      */
@@ -483,7 +381,7 @@ class RefundRecoveryBankTransaction implements ModelInterface, ArrayAccess
     /**
      * Sets refund_currency_value_amount
      *
-     * @param float $refund_currency_value_amount The value amount represents the net monetary value of the bank transaction, recorded in the refund's currency, after applicable deductions.
+     * @param float $refund_currency_value_amount 
      *
      * @return $this
      */

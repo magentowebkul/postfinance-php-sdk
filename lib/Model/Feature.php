@@ -144,7 +144,7 @@ class Feature implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         
         $this->container['beta'] = isset($data['beta']) ? $data['beta'] : null;
@@ -469,7 +469,7 @@ class Feature implements ModelInterface, ArrayAccess
     /**
      * Sets visible
      *
-     * @param bool $visible Whether the feature is visible to the user.
+     * @param bool $visible 
      *
      * @return $this
      */

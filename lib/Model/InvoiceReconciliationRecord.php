@@ -19,8 +19,6 @@
 
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
@@ -32,7 +30,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class InvoiceReconciliationRecord implements ModelInterface, ArrayAccess
+class InvoiceReconciliationRecord extends TransactionAwareEntity 
 {
     const DISCRIMINATOR = null;
 
@@ -61,10 +59,7 @@ class InvoiceReconciliationRecord implements ModelInterface, ArrayAccess
         'family_name' => 'string',
         'given_name' => 'string',
         'iban' => 'string',
-        'id' => 'int',
         'last_resolution_failure' => '\PostFinanceCheckout\Sdk\Model\FailureReason',
-        'linked_space_id' => 'int',
-        'linked_transaction' => 'int',
         'participant_number' => 'string',
         'payment_fee_amount' => 'float',
         'payment_fee_currency' => 'string',
@@ -102,10 +97,7 @@ class InvoiceReconciliationRecord implements ModelInterface, ArrayAccess
         'family_name' => null,
         'given_name' => null,
         'iban' => null,
-        'id' => 'int64',
         'last_resolution_failure' => null,
-        'linked_space_id' => 'int64',
-        'linked_transaction' => 'int64',
         'participant_number' => null,
         'payment_fee_amount' => null,
         'payment_fee_currency' => null,
@@ -144,10 +136,7 @@ class InvoiceReconciliationRecord implements ModelInterface, ArrayAccess
         'family_name' => 'familyName',
         'given_name' => 'givenName',
         'iban' => 'iban',
-        'id' => 'id',
         'last_resolution_failure' => 'lastResolutionFailure',
-        'linked_space_id' => 'linkedSpaceId',
-        'linked_transaction' => 'linkedTransaction',
         'participant_number' => 'participantNumber',
         'payment_fee_amount' => 'paymentFeeAmount',
         'payment_fee_currency' => 'paymentFeeCurrency',
@@ -185,10 +174,7 @@ class InvoiceReconciliationRecord implements ModelInterface, ArrayAccess
         'family_name' => 'setFamilyName',
         'given_name' => 'setGivenName',
         'iban' => 'setIban',
-        'id' => 'setId',
         'last_resolution_failure' => 'setLastResolutionFailure',
-        'linked_space_id' => 'setLinkedSpaceId',
-        'linked_transaction' => 'setLinkedTransaction',
         'participant_number' => 'setParticipantNumber',
         'payment_fee_amount' => 'setPaymentFeeAmount',
         'payment_fee_currency' => 'setPaymentFeeCurrency',
@@ -226,10 +212,7 @@ class InvoiceReconciliationRecord implements ModelInterface, ArrayAccess
         'family_name' => 'getFamilyName',
         'given_name' => 'getGivenName',
         'iban' => 'getIban',
-        'id' => 'getId',
         'last_resolution_failure' => 'getLastResolutionFailure',
-        'linked_space_id' => 'getLinkedSpaceId',
-        'linked_transaction' => 'getLinkedTransaction',
         'participant_number' => 'getParticipantNumber',
         'payment_fee_amount' => 'getPaymentFeeAmount',
         'payment_fee_currency' => 'getPaymentFeeCurrency',
@@ -251,12 +234,6 @@ class InvoiceReconciliationRecord implements ModelInterface, ArrayAccess
 
     
 
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
@@ -264,8 +241,10 @@ class InvoiceReconciliationRecord implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
+        parent::__construct($data);
+
         
         $this->container['address'] = isset($data['address']) ? $data['address'] : null;
         
@@ -291,13 +270,7 @@ class InvoiceReconciliationRecord implements ModelInterface, ArrayAccess
         
         $this->container['iban'] = isset($data['iban']) ? $data['iban'] : null;
         
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
         $this->container['last_resolution_failure'] = isset($data['last_resolution_failure']) ? $data['last_resolution_failure'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['linked_transaction'] = isset($data['linked_transaction']) ? $data['linked_transaction'] : null;
         
         $this->container['participant_number'] = isset($data['participant_number']) ? $data['participant_number'] : null;
         
@@ -342,7 +315,7 @@ class InvoiceReconciliationRecord implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
 
         if (!is_null($this->container['iban']) && (mb_strlen($this->container['iban']) > 100)) {
             $invalidProperties[] = "invalid value for 'iban', the character length must be smaller than or equal to 100.";
@@ -370,7 +343,7 @@ class InvoiceReconciliationRecord implements ModelInterface, ArrayAccess
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes;
+        return self::$swaggerTypes + parent::swaggerTypes();
     }
 
     /**
@@ -380,7 +353,7 @@ class InvoiceReconciliationRecord implements ModelInterface, ArrayAccess
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats;
+        return self::$swaggerFormats + parent::swaggerFormats();
     }
 
 
@@ -392,7 +365,7 @@ class InvoiceReconciliationRecord implements ModelInterface, ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -402,7 +375,7 @@ class InvoiceReconciliationRecord implements ModelInterface, ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -412,7 +385,7 @@ class InvoiceReconciliationRecord implements ModelInterface, ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -745,31 +718,6 @@ class InvoiceReconciliationRecord implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-    
-
-    /**
      * Gets last_resolution_failure
      *
      * @return \PostFinanceCheckout\Sdk\Model\FailureReason
@@ -789,56 +737,6 @@ class InvoiceReconciliationRecord implements ModelInterface, ArrayAccess
     public function setLastResolutionFailure($last_resolution_failure)
     {
         $this->container['last_resolution_failure'] = $last_resolution_failure;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The ID of the space this object belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_transaction
-     *
-     * @return int
-     */
-    public function getLinkedTransaction()
-    {
-        return $this->container['linked_transaction'];
-    }
-
-    /**
-     * Sets linked_transaction
-     *
-     * @param int $linked_transaction The payment transaction this object is linked to.
-     *
-     * @return $this
-     */
-    public function setLinkedTransaction($linked_transaction)
-    {
-        $this->container['linked_transaction'] = $linked_transaction;
 
         return $this;
     }

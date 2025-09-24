@@ -149,7 +149,7 @@ class TransactionInvoiceComment implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         
         $this->container['content'] = isset($data['content']) ? $data['content'] : null;
@@ -484,7 +484,7 @@ class TransactionInvoiceComment implements ModelInterface, ArrayAccess
     /**
      * Sets transaction_invoice
      *
-     * @param int $transaction_invoice The transaction invoice that the comment belongs to.
+     * @param int $transaction_invoice 
      *
      * @return $this
      */

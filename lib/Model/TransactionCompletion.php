@@ -19,8 +19,6 @@
 
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
@@ -32,7 +30,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TransactionCompletion implements ModelInterface, ArrayAccess
+class TransactionCompletion extends TransactionAwareEntity 
 {
     const DISCRIMINATOR = null;
 
@@ -56,15 +54,12 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
         'external_id' => 'string',
         'failed_on' => '\DateTime',
         'failure_reason' => '\PostFinanceCheckout\Sdk\Model\FailureReason',
-        'id' => 'int',
         'invoice_merchant_reference' => 'string',
         'labels' => '\PostFinanceCheckout\Sdk\Model\Label[]',
         'language' => 'string',
         'last_completion' => 'bool',
         'line_item_version' => '\PostFinanceCheckout\Sdk\Model\TransactionLineItemVersion',
         'line_items' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
-        'linked_space_id' => 'int',
-        'linked_transaction' => 'int',
         'mode' => '\PostFinanceCheckout\Sdk\Model\TransactionCompletionMode',
         'next_update_on' => '\DateTime',
         'payment_information' => 'string',
@@ -95,15 +90,12 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
         'external_id' => null,
         'failed_on' => 'date-time',
         'failure_reason' => null,
-        'id' => 'int64',
         'invoice_merchant_reference' => null,
         'labels' => null,
         'language' => null,
         'last_completion' => null,
         'line_item_version' => null,
         'line_items' => null,
-        'linked_space_id' => 'int64',
-        'linked_transaction' => 'int64',
         'mode' => null,
         'next_update_on' => 'date-time',
         'payment_information' => null,
@@ -135,15 +127,12 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
         'external_id' => 'externalId',
         'failed_on' => 'failedOn',
         'failure_reason' => 'failureReason',
-        'id' => 'id',
         'invoice_merchant_reference' => 'invoiceMerchantReference',
         'labels' => 'labels',
         'language' => 'language',
         'last_completion' => 'lastCompletion',
         'line_item_version' => 'lineItemVersion',
         'line_items' => 'lineItems',
-        'linked_space_id' => 'linkedSpaceId',
-        'linked_transaction' => 'linkedTransaction',
         'mode' => 'mode',
         'next_update_on' => 'nextUpdateOn',
         'payment_information' => 'paymentInformation',
@@ -174,15 +163,12 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
         'external_id' => 'setExternalId',
         'failed_on' => 'setFailedOn',
         'failure_reason' => 'setFailureReason',
-        'id' => 'setId',
         'invoice_merchant_reference' => 'setInvoiceMerchantReference',
         'labels' => 'setLabels',
         'language' => 'setLanguage',
         'last_completion' => 'setLastCompletion',
         'line_item_version' => 'setLineItemVersion',
         'line_items' => 'setLineItems',
-        'linked_space_id' => 'setLinkedSpaceId',
-        'linked_transaction' => 'setLinkedTransaction',
         'mode' => 'setMode',
         'next_update_on' => 'setNextUpdateOn',
         'payment_information' => 'setPaymentInformation',
@@ -213,15 +199,12 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
         'external_id' => 'getExternalId',
         'failed_on' => 'getFailedOn',
         'failure_reason' => 'getFailureReason',
-        'id' => 'getId',
         'invoice_merchant_reference' => 'getInvoiceMerchantReference',
         'labels' => 'getLabels',
         'language' => 'getLanguage',
         'last_completion' => 'getLastCompletion',
         'line_item_version' => 'getLineItemVersion',
         'line_items' => 'getLineItems',
-        'linked_space_id' => 'getLinkedSpaceId',
-        'linked_transaction' => 'getLinkedTransaction',
         'mode' => 'getMode',
         'next_update_on' => 'getNextUpdateOn',
         'payment_information' => 'getPaymentInformation',
@@ -241,12 +224,6 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
 
     
 
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
@@ -254,8 +231,10 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
+        parent::__construct($data);
+
         
         $this->container['amount'] = isset($data['amount']) ? $data['amount'] : null;
         
@@ -271,8 +250,6 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
         
         $this->container['failure_reason'] = isset($data['failure_reason']) ? $data['failure_reason'] : null;
         
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
         $this->container['invoice_merchant_reference'] = isset($data['invoice_merchant_reference']) ? $data['invoice_merchant_reference'] : null;
         
         $this->container['labels'] = isset($data['labels']) ? $data['labels'] : null;
@@ -284,10 +261,6 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
         $this->container['line_item_version'] = isset($data['line_item_version']) ? $data['line_item_version'] : null;
         
         $this->container['line_items'] = isset($data['line_items']) ? $data['line_items'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['linked_transaction'] = isset($data['linked_transaction']) ? $data['linked_transaction'] : null;
         
         $this->container['mode'] = isset($data['mode']) ? $data['mode'] : null;
         
@@ -328,7 +301,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
 
         if (!is_null($this->container['external_id']) && (mb_strlen($this->container['external_id']) > 100)) {
             $invalidProperties[] = "invalid value for 'external_id', the character length must be smaller than or equal to 100.";
@@ -356,7 +329,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes;
+        return self::$swaggerTypes + parent::swaggerTypes();
     }
 
     /**
@@ -366,7 +339,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats;
+        return self::$swaggerFormats + parent::swaggerFormats();
     }
 
 
@@ -378,7 +351,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -388,7 +361,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -398,7 +371,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -439,7 +412,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets amount
      *
-     * @param float $amount The total amount to be captured in this completion, including taxes.
+     * @param float $amount The amount which is captured. The amount represents sum of line items including taxes.
      *
      * @return $this
      */
@@ -464,7 +437,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets base_line_items
      *
-     * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $base_line_items The original line items from the transaction that serve as the baseline for this completion.
+     * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $base_line_items The base line items on which the completion is applied on.
      *
      * @return $this
      */
@@ -489,7 +462,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets created_by
      *
-     * @param int $created_by The ID of the user the transaction completion was created by.
+     * @param int $created_by 
      *
      * @return $this
      */
@@ -539,7 +512,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets external_id
      *
-     * @param string $external_id A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
+     * @param string $external_id The external ID helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
      *
      * @return $this
      */
@@ -571,7 +544,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets failed_on
      *
-     * @param \DateTime $failed_on The date and time when the transaction completion failed.
+     * @param \DateTime $failed_on 
      *
      * @return $this
      */
@@ -596,38 +569,13 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets failure_reason
      *
-     * @param \PostFinanceCheckout\Sdk\Model\FailureReason $failure_reason The reason for the failure of the transaction completion.
+     * @param \PostFinanceCheckout\Sdk\Model\FailureReason $failure_reason 
      *
      * @return $this
      */
     public function setFailureReason($failure_reason)
     {
         $this->container['failure_reason'] = $failure_reason;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
 
         return $this;
     }
@@ -646,7 +594,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets invoice_merchant_reference
      *
-     * @param string $invoice_merchant_reference The merchant's reference used to identify the invoice.
+     * @param string $invoice_merchant_reference 
      *
      * @return $this
      */
@@ -725,7 +673,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets last_completion
      *
-     * @param bool $last_completion Whether this is the final completion for the transaction. After the last completion is successfully created, the transaction enters its final state, and no further completions can occur.
+     * @param bool $last_completion Indicates if this is the last completion. After the last completion is created the transaction cannot be completed anymore.
      *
      * @return $this
      */
@@ -750,7 +698,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets line_item_version
      *
-     * @param \PostFinanceCheckout\Sdk\Model\TransactionLineItemVersion $line_item_version The specific version of the line items that are being used for this completion.
+     * @param \PostFinanceCheckout\Sdk\Model\TransactionLineItemVersion $line_item_version 
      *
      * @return $this
      */
@@ -775,63 +723,13 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets line_items
      *
-     * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $line_items The line items captured in this transaction completion.
+     * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $line_items The line items which are captured.
      *
      * @return $this
      */
     public function setLineItems($line_items)
     {
         $this->container['line_items'] = $line_items;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The ID of the space this object belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_transaction
-     *
-     * @return int
-     */
-    public function getLinkedTransaction()
-    {
-        return $this->container['linked_transaction'];
-    }
-
-    /**
-     * Sets linked_transaction
-     *
-     * @param int $linked_transaction The payment transaction this object is linked to.
-     *
-     * @return $this
-     */
-    public function setLinkedTransaction($linked_transaction)
-    {
-        $this->container['linked_transaction'] = $linked_transaction;
 
         return $this;
     }
@@ -850,7 +748,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets mode
      *
-     * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletionMode $mode The mode of transaction completion, such as online or offline, determining how the completion process is executed.
+     * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletionMode $mode 
      *
      * @return $this
      */
@@ -875,7 +773,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets next_update_on
      *
-     * @param \DateTime $next_update_on The date and time when the next update of the object's state is planned.
+     * @param \DateTime $next_update_on 
      *
      * @return $this
      */
@@ -900,7 +798,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets payment_information
      *
-     * @param string $payment_information Payment-specific details related to this transaction completion such as payment instructions or references needed for processing.
+     * @param string $payment_information 
      *
      * @return $this
      */
@@ -950,7 +848,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets processing_on
      *
-     * @param \DateTime $processing_on The date and time when the processing of the transaction completion was started.
+     * @param \DateTime $processing_on 
      *
      * @return $this
      */
@@ -975,7 +873,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets processor_reference
      *
-     * @param string $processor_reference The reference ID provided by the payment processor, used to trace the completion through the external payment system.
+     * @param string $processor_reference 
      *
      * @return $this
      */
@@ -1000,7 +898,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets remaining_line_items
      *
-     * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $remaining_line_items The line items yet to be captured in the transaction.
+     * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $remaining_line_items 
      *
      * @return $this
      */
@@ -1075,7 +973,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets statement_descriptor
      *
-     * @param string $statement_descriptor The statement descriptor that appears on a customer's bank statement, providing an explanation for charges or payments, helping customers identify the transaction.
+     * @param string $statement_descriptor The statement descriptor explain charges or payments on bank statements.
      *
      * @return $this
      */
@@ -1104,7 +1002,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets succeeded_on
      *
-     * @param \DateTime $succeeded_on The date and time when the transaction completion succeeded.
+     * @param \DateTime $succeeded_on 
      *
      * @return $this
      */
@@ -1129,7 +1027,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets tax_amount
      *
-     * @param float $tax_amount The portion of the captured amount that corresponds to taxes.
+     * @param float $tax_amount The total sum of all taxes of line items.
      *
      * @return $this
      */
@@ -1154,7 +1052,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets time_zone
      *
-     * @param string $time_zone The time zone that this object is associated with.
+     * @param string $time_zone 
      *
      * @return $this
      */
@@ -1179,7 +1077,7 @@ class TransactionCompletion implements ModelInterface, ArrayAccess
     /**
      * Sets timeout_on
      *
-     * @param \DateTime $timeout_on The date and time when the object will expire.
+     * @param \DateTime $timeout_on 
      *
      * @return $this
      */

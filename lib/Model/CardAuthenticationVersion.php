@@ -25,7 +25,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * CardAuthenticationVersion model
  *
  * @category    Class
- * @description 
+ * @description This model defines the card authentication versions.
  * @package     PostFinanceCheckout\Sdk
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2

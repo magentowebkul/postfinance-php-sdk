@@ -19,20 +19,18 @@
 
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
  * TransactionInvoice model
  *
  * @category    Class
- * @description 
+ * @description The transaction invoice represents the invoice document for a particular transaction.
  * @package     PostFinanceCheckout\Sdk
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TransactionInvoice implements ModelInterface, ArrayAccess
+class TransactionInvoice extends TransactionAwareEntity 
 {
     const DISCRIMINATOR = null;
 
@@ -58,11 +56,8 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
         'due_on' => '\DateTime',
         'environment' => '\PostFinanceCheckout\Sdk\Model\Environment',
         'external_id' => 'string',
-        'id' => 'int',
         'language' => 'string',
         'line_items' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
-        'linked_space_id' => 'int',
-        'linked_transaction' => 'int',
         'merchant_reference' => 'string',
         'outstanding_amount' => 'float',
         'paid_on' => '\DateTime',
@@ -89,11 +84,8 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
         'due_on' => 'date-time',
         'environment' => null,
         'external_id' => null,
-        'id' => 'int64',
         'language' => null,
         'line_items' => null,
-        'linked_space_id' => 'int64',
-        'linked_transaction' => 'int64',
         'merchant_reference' => null,
         'outstanding_amount' => null,
         'paid_on' => 'date-time',
@@ -121,11 +113,8 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
         'due_on' => 'dueOn',
         'environment' => 'environment',
         'external_id' => 'externalId',
-        'id' => 'id',
         'language' => 'language',
         'line_items' => 'lineItems',
-        'linked_space_id' => 'linkedSpaceId',
-        'linked_transaction' => 'linkedTransaction',
         'merchant_reference' => 'merchantReference',
         'outstanding_amount' => 'outstandingAmount',
         'paid_on' => 'paidOn',
@@ -152,11 +141,8 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
         'due_on' => 'setDueOn',
         'environment' => 'setEnvironment',
         'external_id' => 'setExternalId',
-        'id' => 'setId',
         'language' => 'setLanguage',
         'line_items' => 'setLineItems',
-        'linked_space_id' => 'setLinkedSpaceId',
-        'linked_transaction' => 'setLinkedTransaction',
         'merchant_reference' => 'setMerchantReference',
         'outstanding_amount' => 'setOutstandingAmount',
         'paid_on' => 'setPaidOn',
@@ -183,11 +169,8 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
         'due_on' => 'getDueOn',
         'environment' => 'getEnvironment',
         'external_id' => 'getExternalId',
-        'id' => 'getId',
         'language' => 'getLanguage',
         'line_items' => 'getLineItems',
-        'linked_space_id' => 'getLinkedSpaceId',
-        'linked_transaction' => 'getLinkedTransaction',
         'merchant_reference' => 'getMerchantReference',
         'outstanding_amount' => 'getOutstandingAmount',
         'paid_on' => 'getPaidOn',
@@ -201,12 +184,6 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
 
     
 
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
@@ -214,8 +191,10 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
+        parent::__construct($data);
+
         
         $this->container['amount'] = isset($data['amount']) ? $data['amount'] : null;
         
@@ -235,15 +214,9 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
         
         $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
         
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
         $this->container['language'] = isset($data['language']) ? $data['language'] : null;
         
         $this->container['line_items'] = isset($data['line_items']) ? $data['line_items'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['linked_transaction'] = isset($data['linked_transaction']) ? $data['linked_transaction'] : null;
         
         $this->container['merchant_reference'] = isset($data['merchant_reference']) ? $data['merchant_reference'] : null;
         
@@ -272,7 +245,7 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
 
         if (!is_null($this->container['external_id']) && (mb_strlen($this->container['external_id']) > 100)) {
             $invalidProperties[] = "invalid value for 'external_id', the character length must be smaller than or equal to 100.";
@@ -296,7 +269,7 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes;
+        return self::$swaggerTypes + parent::swaggerTypes();
     }
 
     /**
@@ -306,7 +279,7 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats;
+        return self::$swaggerFormats + parent::swaggerFormats();
     }
 
 
@@ -318,7 +291,7 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -328,7 +301,7 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -338,7 +311,7 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -379,7 +352,7 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
     /**
      * Sets amount
      *
-     * @param float $amount The total sum of all line items on the invoice, including taxes.
+     * @param float $amount 
      *
      * @return $this
      */
@@ -404,7 +377,7 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
     /**
      * Sets billing_address
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Address $billing_address The address associated with the invoice, used for billing purposes.
+     * @param \PostFinanceCheckout\Sdk\Model\Address $billing_address 
      *
      * @return $this
      */
@@ -429,7 +402,7 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
     /**
      * Sets completion
      *
-     * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletion $completion The transaction completion this object is linked to.
+     * @param \PostFinanceCheckout\Sdk\Model\TransactionCompletion $completion 
      *
      * @return $this
      */
@@ -454,7 +427,7 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
     /**
      * Sets created_on
      *
-     * @param \DateTime $created_on The date and time when the object was created.
+     * @param \DateTime $created_on The date on which the invoice is created on.
      *
      * @return $this
      */
@@ -479,7 +452,7 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
     /**
      * Sets derecognized_by
      *
-     * @param int $derecognized_by The ID of the user the invoice was derecognized by.
+     * @param int $derecognized_by The id of the user which marked the invoice as derecognized.
      *
      * @return $this
      */
@@ -504,7 +477,7 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
     /**
      * Sets derecognized_on
      *
-     * @param \DateTime $derecognized_on The date and time when the invoice was derecognized, meaning it is no longer considered outstanding or valid in the system.
+     * @param \DateTime $derecognized_on The date on which the invoice is marked as derecognized.
      *
      * @return $this
      */
@@ -529,7 +502,7 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
     /**
      * Sets due_on
      *
-     * @param \DateTime $due_on The due date for payment of the invoice.
+     * @param \DateTime $due_on The date on which the invoice should be paid on.
      *
      * @return $this
      */
@@ -554,7 +527,7 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
     /**
      * Sets environment
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Environment $environment The environment used when rendering resources.
+     * @param \PostFinanceCheckout\Sdk\Model\Environment $environment 
      *
      * @return $this
      */
@@ -579,7 +552,7 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
     /**
      * Sets external_id
      *
-     * @param string $external_id A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
+     * @param string $external_id The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
      *
      * @return $this
      */
@@ -593,31 +566,6 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
         }
 
         $this->container['external_id'] = $external_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
 
         return $this;
     }
@@ -661,63 +609,13 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
     /**
      * Sets line_items
      *
-     * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $line_items The invoiced line items that will appear on the invoice document.
+     * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $line_items 
      *
      * @return $this
      */
     public function setLineItems($line_items)
     {
         $this->container['line_items'] = $line_items;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The ID of the space this object belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_transaction
-     *
-     * @return int
-     */
-    public function getLinkedTransaction()
-    {
-        return $this->container['linked_transaction'];
-    }
-
-    /**
-     * Sets linked_transaction
-     *
-     * @param int $linked_transaction The payment transaction this object is linked to.
-     *
-     * @return $this
-     */
-    public function setLinkedTransaction($linked_transaction)
-    {
-        $this->container['linked_transaction'] = $linked_transaction;
 
         return $this;
     }
@@ -736,7 +634,7 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
     /**
      * Sets merchant_reference
      *
-     * @param string $merchant_reference The merchant's reference used to identify the invoice.
+     * @param string $merchant_reference 
      *
      * @return $this
      */
@@ -765,7 +663,7 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
     /**
      * Sets outstanding_amount
      *
-     * @param float $outstanding_amount The remaining amount the buyer owes to the merchant. A negative value indicates the invoice has been overpaid.
+     * @param float $outstanding_amount The outstanding amount indicates how much the buyer owes the merchant. A negative amount indicates that the invoice is overpaid.
      *
      * @return $this
      */
@@ -790,7 +688,7 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
     /**
      * Sets paid_on
      *
-     * @param \DateTime $paid_on The date and time when the invoice was recorded as paid. May differ from the actual payment date due to processing delays.
+     * @param \DateTime $paid_on The date on which the invoice is marked as paid. Eventually this date lags behind of the actual paid date.
      *
      * @return $this
      */
@@ -890,7 +788,7 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
     /**
      * Sets tax_amount
      *
-     * @param float $tax_amount The portion of the invoiced amount that corresponds to taxes.
+     * @param float $tax_amount 
      *
      * @return $this
      */
@@ -915,7 +813,7 @@ class TransactionInvoice implements ModelInterface, ArrayAccess
     /**
      * Sets time_zone
      *
-     * @param string $time_zone The time zone that this object is associated with.
+     * @param string $time_zone 
      *
      * @return $this
      */

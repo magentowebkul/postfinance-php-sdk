@@ -114,7 +114,7 @@ class CompletionLineItemCreate implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         
         $this->container['amount'] = isset($data['amount']) ? $data['amount'] : null;
@@ -240,7 +240,7 @@ class CompletionLineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Sets amount
      *
-     * @param float $amount The total amount of the line item to be captured, including taxes.
+     * @param float $amount The total amount of the line item including any tax.
      *
      * @return $this
      */
@@ -265,7 +265,7 @@ class CompletionLineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Sets quantity
      *
-     * @param float $quantity The number of items to be captured.
+     * @param float $quantity The quantity of the line item which should be completed.
      *
      * @return $this
      */
@@ -290,7 +290,7 @@ class CompletionLineItemCreate implements ModelInterface, ArrayAccess
     /**
      * Sets unique_id
      *
-     * @param string $unique_id The unique identifier of the line item within the set of line items.
+     * @param string $unique_id The unique id identifies the line item on which the capture is applied on.
      *
      * @return $this
      */

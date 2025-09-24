@@ -129,7 +129,7 @@ class CurrencyBankAccount implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         
         $this->container['bank_account'] = isset($data['bank_account']) ? $data['bank_account'] : null;
@@ -248,7 +248,7 @@ class CurrencyBankAccount implements ModelInterface, ArrayAccess
     /**
      * Sets bank_account
      *
-     * @param \PostFinanceCheckout\Sdk\Model\BankAccount $bank_account The bank account this currency bank account belongs to.
+     * @param \PostFinanceCheckout\Sdk\Model\BankAccount $bank_account 
      *
      * @return $this
      */
@@ -273,7 +273,7 @@ class CurrencyBankAccount implements ModelInterface, ArrayAccess
     /**
      * Sets currency
      *
-     * @param string $currency The currency associated with the bank account.
+     * @param string $currency 
      *
      * @return $this
      */
@@ -298,7 +298,7 @@ class CurrencyBankAccount implements ModelInterface, ArrayAccess
     /**
      * Sets environment
      *
-     * @param \PostFinanceCheckout\Sdk\Model\BankAccountEnvironment $environment Whether the bank account operates in a test or production environment.
+     * @param \PostFinanceCheckout\Sdk\Model\BankAccountEnvironment $environment 
      *
      * @return $this
      */

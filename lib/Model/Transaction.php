@@ -449,7 +449,7 @@ class Transaction implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         
         $this->container['accept_header'] = isset($data['accept_header']) ? $data['accept_header'] : null;
@@ -1447,7 +1447,7 @@ class Transaction implements ModelInterface, ArrayAccess
     /**
      * Sets environment
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Environment $environment The environment used when rendering resources.
+     * @param \PostFinanceCheckout\Sdk\Model\Environment $environment 
      *
      * @return $this
      */

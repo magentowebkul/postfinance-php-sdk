@@ -19,8 +19,6 @@
 
 
 namespace PostFinanceCheckout\Sdk\Model;
-
-use \ArrayAccess;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
 /**
@@ -32,7 +30,7 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * @author      wallee AG
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class TransactionLineItemVersion implements ModelInterface, ArrayAccess
+class TransactionLineItemVersion extends TransactionAwareEntity 
 {
     const DISCRIMINATOR = null;
 
@@ -55,12 +53,9 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
         'external_id' => 'string',
         'failed_on' => '\DateTime',
         'failure_reason' => '\PostFinanceCheckout\Sdk\Model\FailureReason',
-        'id' => 'int',
         'labels' => '\PostFinanceCheckout\Sdk\Model\Label[]',
         'language' => 'string',
         'line_items' => '\PostFinanceCheckout\Sdk\Model\LineItem[]',
-        'linked_space_id' => 'int',
-        'linked_transaction' => 'int',
         'next_update_on' => '\DateTime',
         'planned_purge_date' => '\DateTime',
         'processing_on' => '\DateTime',
@@ -85,12 +80,9 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
         'external_id' => null,
         'failed_on' => 'date-time',
         'failure_reason' => null,
-        'id' => 'int64',
         'labels' => null,
         'language' => null,
         'line_items' => null,
-        'linked_space_id' => 'int64',
-        'linked_transaction' => 'int64',
         'next_update_on' => 'date-time',
         'planned_purge_date' => 'date-time',
         'processing_on' => 'date-time',
@@ -116,12 +108,9 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
         'external_id' => 'externalId',
         'failed_on' => 'failedOn',
         'failure_reason' => 'failureReason',
-        'id' => 'id',
         'labels' => 'labels',
         'language' => 'language',
         'line_items' => 'lineItems',
-        'linked_space_id' => 'linkedSpaceId',
-        'linked_transaction' => 'linkedTransaction',
         'next_update_on' => 'nextUpdateOn',
         'planned_purge_date' => 'plannedPurgeDate',
         'processing_on' => 'processingOn',
@@ -146,12 +135,9 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
         'external_id' => 'setExternalId',
         'failed_on' => 'setFailedOn',
         'failure_reason' => 'setFailureReason',
-        'id' => 'setId',
         'labels' => 'setLabels',
         'language' => 'setLanguage',
         'line_items' => 'setLineItems',
-        'linked_space_id' => 'setLinkedSpaceId',
-        'linked_transaction' => 'setLinkedTransaction',
         'next_update_on' => 'setNextUpdateOn',
         'planned_purge_date' => 'setPlannedPurgeDate',
         'processing_on' => 'setProcessingOn',
@@ -176,12 +162,9 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
         'external_id' => 'getExternalId',
         'failed_on' => 'getFailedOn',
         'failure_reason' => 'getFailureReason',
-        'id' => 'getId',
         'labels' => 'getLabels',
         'language' => 'getLanguage',
         'line_items' => 'getLineItems',
-        'linked_space_id' => 'getLinkedSpaceId',
-        'linked_transaction' => 'getLinkedTransaction',
         'next_update_on' => 'getNextUpdateOn',
         'planned_purge_date' => 'getPlannedPurgeDate',
         'processing_on' => 'getProcessingOn',
@@ -196,12 +179,6 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
 
     
 
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
@@ -209,8 +186,10 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
+        parent::__construct($data);
+
         
         $this->container['amount'] = isset($data['amount']) ? $data['amount'] : null;
         
@@ -224,17 +203,11 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
         
         $this->container['failure_reason'] = isset($data['failure_reason']) ? $data['failure_reason'] : null;
         
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        
         $this->container['labels'] = isset($data['labels']) ? $data['labels'] : null;
         
         $this->container['language'] = isset($data['language']) ? $data['language'] : null;
         
         $this->container['line_items'] = isset($data['line_items']) ? $data['line_items'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
-        
-        $this->container['linked_transaction'] = isset($data['linked_transaction']) ? $data['linked_transaction'] : null;
         
         $this->container['next_update_on'] = isset($data['next_update_on']) ? $data['next_update_on'] : null;
         
@@ -265,7 +238,7 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
 
         return $invalidProperties;
     }
@@ -277,7 +250,7 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes;
+        return self::$swaggerTypes + parent::swaggerTypes();
     }
 
     /**
@@ -287,7 +260,7 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats;
+        return self::$swaggerFormats + parent::swaggerFormats();
     }
 
 
@@ -299,7 +272,7 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -309,7 +282,7 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -319,7 +292,7 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -360,7 +333,7 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
     /**
      * Sets amount
      *
-     * @param float $amount The total amount of the updated line items, including taxes.
+     * @param float $amount 
      *
      * @return $this
      */
@@ -385,7 +358,7 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
     /**
      * Sets created_by
      *
-     * @param int $created_by The ID of the user the line item version was created by.
+     * @param int $created_by 
      *
      * @return $this
      */
@@ -435,7 +408,7 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
     /**
      * Sets external_id
      *
-     * @param string $external_id A client-generated nonce which uniquely identifies some action to be executed. Subsequent requests with the same external ID do not execute the action again, but return the original result.
+     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
      *
      * @return $this
      */
@@ -460,7 +433,7 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
     /**
      * Sets failed_on
      *
-     * @param \DateTime $failed_on The date and time when the processing of the line item version failed.
+     * @param \DateTime $failed_on 
      *
      * @return $this
      */
@@ -492,31 +465,6 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
     public function setFailureReason($failure_reason)
     {
         $this->container['failure_reason'] = $failure_reason;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id A unique identifier for the object.
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
 
         return $this;
     }
@@ -585,63 +533,13 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
     /**
      * Sets line_items
      *
-     * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $line_items The line items that replace the original line items in the transaction.
+     * @param \PostFinanceCheckout\Sdk\Model\LineItem[] $line_items 
      *
      * @return $this
      */
     public function setLineItems($line_items)
     {
         $this->container['line_items'] = $line_items;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The ID of the space this object belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_transaction
-     *
-     * @return int
-     */
-    public function getLinkedTransaction()
-    {
-        return $this->container['linked_transaction'];
-    }
-
-    /**
-     * Sets linked_transaction
-     *
-     * @param int $linked_transaction The payment transaction this object is linked to.
-     *
-     * @return $this
-     */
-    public function setLinkedTransaction($linked_transaction)
-    {
-        $this->container['linked_transaction'] = $linked_transaction;
 
         return $this;
     }
@@ -660,7 +558,7 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
     /**
      * Sets next_update_on
      *
-     * @param \DateTime $next_update_on The date and time when the next update of the line item version's state is planned.
+     * @param \DateTime $next_update_on 
      *
      * @return $this
      */
@@ -710,7 +608,7 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
     /**
      * Sets processing_on
      *
-     * @param \DateTime $processing_on The date and time when the processing of the line item version was started.
+     * @param \DateTime $processing_on 
      *
      * @return $this
      */
@@ -785,7 +683,7 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
     /**
      * Sets succeeded_on
      *
-     * @param \DateTime $succeeded_on The date and time when the line item version was processed successfully.
+     * @param \DateTime $succeeded_on 
      *
      * @return $this
      */
@@ -810,7 +708,7 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
     /**
      * Sets tax_amount
      *
-     * @param float $tax_amount The portion of the total amount that corresponds to taxes.
+     * @param float $tax_amount 
      *
      * @return $this
      */
@@ -835,7 +733,7 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
     /**
      * Sets timeout_on
      *
-     * @param \DateTime $timeout_on The date and time by when the line item version is expected to be processed.
+     * @param \DateTime $timeout_on 
      *
      * @return $this
      */
@@ -860,7 +758,7 @@ class TransactionLineItemVersion implements ModelInterface, ArrayAccess
     /**
      * Sets transaction
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Transaction $transaction The transaction that the line item version belongs to.
+     * @param \PostFinanceCheckout\Sdk\Model\Transaction $transaction 
      *
      * @return $this
      */

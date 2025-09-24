@@ -119,7 +119,7 @@ class TokenVersionType implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         
         $this->container['description'] = isset($data['description']) ? $data['description'] : null;
@@ -259,7 +259,7 @@ class TokenVersionType implements ModelInterface, ArrayAccess
     /**
      * Sets feature
      *
-     * @param \PostFinanceCheckout\Sdk\Model\Feature $feature The feature that the token version type belongs to.
+     * @param \PostFinanceCheckout\Sdk\Model\Feature $feature 
      *
      * @return $this
      */
