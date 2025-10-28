@@ -1,8 +1,12 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ * PostFinance Php SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
+ * This library allows to interact with the PostFinance payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://www.postfinance.ch/en/private.html
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace PostFinanceCheckout\Sdk\Model;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
@@ -25,23 +28,30 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * DunningCaseState model
  *
  * @category    Class
- * @description 
  * @package     PostFinanceCheckout\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
  */
 class DunningCaseState
 {
     /**
      * Possible values of this enum
      */
-    const RUNNING = 'RUNNING';
-    const SUSPENDED = 'SUSPENDED';
-    const CANCELED = 'CANCELED';
-    const DERECOGNIZED = 'DERECOGNIZED';
-    const FAILED = 'FAILED';
-    const SUCCEEDED = 'SUCCEEDED';
-    
+    public const RUNNING = 'RUNNING';
+
+    public const SUSPENDED = 'SUSPENDED';
+
+    public const CANCELED = 'CANCELED';
+
+    public const DERECOGNIZED = 'DERECOGNIZED';
+
+    public const FAILED = 'FAILED';
+
+    public const SUCCEEDED = 'SUCCEEDED';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -54,7 +64,7 @@ class DunningCaseState
             self::CANCELED,
             self::DERECOGNIZED,
             self::FAILED,
-            self::SUCCEEDED,
+            self::SUCCEEDED
         ];
     }
 }

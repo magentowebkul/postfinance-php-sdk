@@ -1,8 +1,12 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ * PostFinance Php SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
+ * This library allows to interact with the PostFinance payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://www.postfinance.ch/en/private.html
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace PostFinanceCheckout\Sdk\Model;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
@@ -25,19 +28,22 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * SubscriptionChargeProcessingType model
  *
  * @category    Class
- * @description 
  * @package     PostFinanceCheckout\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
  */
 class SubscriptionChargeProcessingType
 {
     /**
      * Possible values of this enum
      */
-    const SYNCHRONOUS = 'SYNCHRONOUS';
-    const CHARGE_FLOW = 'CHARGE_FLOW';
-    
+    public const SYNCHRONOUS = 'SYNCHRONOUS';
+
+    public const CHARGE_FLOW = 'CHARGE_FLOW';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -46,7 +52,7 @@ class SubscriptionChargeProcessingType
     {
         return [
             self::SYNCHRONOUS,
-            self::CHARGE_FLOW,
+            self::CHARGE_FLOW
         ];
     }
 }
