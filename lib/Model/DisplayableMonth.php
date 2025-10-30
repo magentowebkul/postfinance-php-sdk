@@ -1,8 +1,12 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ * PostFinance Php SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
+ * This library allows to interact with the PostFinance payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://www.postfinance.ch/en/private.html
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace PostFinanceCheckout\Sdk\Model;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
@@ -25,29 +28,42 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * DisplayableMonth model
  *
  * @category    Class
- * @description 
  * @package     PostFinanceCheckout\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
  */
 class DisplayableMonth
 {
     /**
      * Possible values of this enum
      */
-    const JANUARY = 'JANUARY';
-    const FEBRUARY = 'FEBRUARY';
-    const MARCH = 'MARCH';
-    const APRIL = 'APRIL';
-    const MAY = 'MAY';
-    const JUNE = 'JUNE';
-    const JULY = 'JULY';
-    const AUGUST = 'AUGUST';
-    const SEPTEMBER = 'SEPTEMBER';
-    const OCTOBER = 'OCTOBER';
-    const NOVEMBER = 'NOVEMBER';
-    const DECEMBER = 'DECEMBER';
-    
+    public const JANUARY = 'JANUARY';
+
+    public const FEBRUARY = 'FEBRUARY';
+
+    public const MARCH = 'MARCH';
+
+    public const APRIL = 'APRIL';
+
+    public const MAY = 'MAY';
+
+    public const JUNE = 'JUNE';
+
+    public const JULY = 'JULY';
+
+    public const AUGUST = 'AUGUST';
+
+    public const SEPTEMBER = 'SEPTEMBER';
+
+    public const OCTOBER = 'OCTOBER';
+
+    public const NOVEMBER = 'NOVEMBER';
+
+    public const DECEMBER = 'DECEMBER';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -66,7 +82,7 @@ class DisplayableMonth
             self::SEPTEMBER,
             self::OCTOBER,
             self::NOVEMBER,
-            self::DECEMBER,
+            self::DECEMBER
         ];
     }
 }

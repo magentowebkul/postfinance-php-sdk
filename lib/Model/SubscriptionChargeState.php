@@ -1,8 +1,12 @@
 <?php
 /**
- * PostFinance Checkout SDK
+ * PostFinance Php SDK
  *
- * This library allows to interact with the PostFinance Checkout payment service.
+ * This library allows to interact with the PostFinance payment service.
+ *
+ * Copyright owner: Wallee AG
+ * Website: https://www.postfinance.ch/en/private.html
+ * Developer email: ecosystem-team@wallee.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +21,6 @@
  * limitations under the License.
  */
 
-
 namespace PostFinanceCheckout\Sdk\Model;
 use \PostFinanceCheckout\Sdk\ObjectSerializer;
 
@@ -25,22 +28,28 @@ use \PostFinanceCheckout\Sdk\ObjectSerializer;
  * SubscriptionChargeState model
  *
  * @category    Class
- * @description 
  * @package     PostFinanceCheckout\Sdk
  * @author      wallee AG
- * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
+ * @license     Apache-2.0
+ * The Apache License, Version 2.0
+ * See the full license at https://www.apache.org/licenses/LICENSE-2.0.txt
+ * @version     5.0.0
  */
 class SubscriptionChargeState
 {
     /**
      * Possible values of this enum
      */
-    const SCHEDULED = 'SCHEDULED';
-    const DISCARDED = 'DISCARDED';
-    const PROCESSING = 'PROCESSING';
-    const SUCCESSFUL = 'SUCCESSFUL';
-    const FAILED = 'FAILED';
-    
+    public const SCHEDULED = 'SCHEDULED';
+
+    public const DISCARDED = 'DISCARDED';
+
+    public const PROCESSING = 'PROCESSING';
+
+    public const SUCCESSFUL = 'SUCCESSFUL';
+
+    public const FAILED = 'FAILED';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -52,7 +61,7 @@ class SubscriptionChargeState
             self::DISCARDED,
             self::PROCESSING,
             self::SUCCESSFUL,
-            self::FAILED,
+            self::FAILED
         ];
     }
 }
